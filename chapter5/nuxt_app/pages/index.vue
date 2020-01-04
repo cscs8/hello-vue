@@ -34,7 +34,7 @@ export default {
         d.getSeconds() +
         "." +
         d.getMilliseconds();
-    }, 1);
+    }, 1000);
   }
 };
 </script>
