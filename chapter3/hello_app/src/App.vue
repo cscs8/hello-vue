@@ -1,15 +1,29 @@
 <template>
   <div id="app">
-    <HelloWorld title="Hello" />
+    <HelloWorld :title="message" />
+    <hr />
+    <button v-on:click="doAction">change title</button>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
+
 export default {
   name: "app",
   components: {
     HelloWorld
+  },
+  data: function() {
+    return {
+      message: "HELLO"
+    };
+  },
+  methods: {
+    doAction: function() {
+      var input = prompt("new title:");
+      this.message = input;
+    }
   }
 };
 </script>
