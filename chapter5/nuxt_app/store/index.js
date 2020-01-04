@@ -13,7 +13,7 @@ const createStore = () => {
                 state.counter++;
             },
             reset: function (state) {
-                state.count = 0;
+                state.counter = 0;
             }
         },
     }
