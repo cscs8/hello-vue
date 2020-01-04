@@ -5,7 +5,7 @@ const createStore = () => {
         state: function () {
             return {
                 message: 'count number.',
-                number: 0,
+                counter: 0,
             };
         }
     })
