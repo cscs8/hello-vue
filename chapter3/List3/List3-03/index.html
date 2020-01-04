@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My first Vue app</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        .hello {
+            font-size: 20pt;
+            font-weight: bold;
+            border: 1px solid magenta;
+            padding: 5px 10px 0px 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Vue.js</h1>
+    <div id="app">
+        <div>
+            <hello name="Taro" ooo="oo! taro?" />
+        </div>
+        <div>
+            <hello name="Hanako" ooo="OO! Hanako!" />
+        </div>
+    </div>
+
+    <script>
+        Vue.component('hello',
+            {
+                props: { name: String, ooo: String },
+                template: '<p class="hello">Hello, {{ ooo }}{{name}} !</p>'
+            })
+
+        var app = new Vue({
+            el: '#app'
+        })
+
+    </script>
+
+
+</body>
+
+
+</html>
