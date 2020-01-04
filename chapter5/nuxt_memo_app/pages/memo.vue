@@ -62,9 +62,9 @@ export default {
       if (this.find_flg) {
         var arr = [];
         var data = this.$store.state.memo.memo;
-        var isExists =
-          0 <= element.title.toLowerCase().indexOf(this.title.toLowerCase());
         data.forEach(element => {
+          var isExists =
+            0 <= element.title.toLowerCase().indexOf(this.title.toLowerCase());
           if (isExists) {
             arr.push(element);
           }
