@@ -107,7 +107,7 @@ export default {
     },
     insert: function() {
       this.$store.commit("memo/insert", {
-        ttitle: this.title,
+        title: this.title,
         content: this.content
       });
       this.title = "";
