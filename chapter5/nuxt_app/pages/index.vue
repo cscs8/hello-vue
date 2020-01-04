@@ -5,7 +5,7 @@
     <p>{{$store.state.message}}</p>
     <p>{{ message }}</p>
     <hr />
-    <div class="link" @click="$store.commit('count')" @click.ctrl="$store.commit('reset')">
+    <div class="link" @click.exact="$store.commit('count')" @click.ctrl="$store.commit('reset')">
       <a>clicked: {{ $store.state.counter }}</a>
     </div>
     <router-link to="/other">Go to Other</router-link>
