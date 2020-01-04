@@ -2,6 +2,7 @@
   <div class="container">
     <logo />
     <h1 class="title">{{ title }}</h1>
+    <p>{{$store.state.message}}</p>
     <p>{{ message }}</p>
     <hr />
     <router-link to="/other">Go to Other</router-link>
