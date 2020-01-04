@@ -5,6 +5,9 @@
     <p>{{$store.state.message}}</p>
     <p>{{ message }}</p>
     <hr />
+    <div class="link" v-on:click="doAction">
+      <a>clicked: {{ $store.state.counter }}</a>
+    </div>
     <router-link to="/other">Go to Other</router-link>
     <pre>[{{now}}]</pre>
   </div>
@@ -36,6 +39,11 @@ export default {
         "." +
         d.getMilliseconds();
     }, 1000);
+  },
+  methods: {
+    doAction: function() {
+      this.$store.state.counter++;
+    }
   }
 };
 </script>
@@ -60,6 +68,9 @@ pre {
 hr {
   margin: 10px 0px;
 }
+a {
+  font-size: 16pt;
+}
 
 .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
@@ -79,6 +90,10 @@ hr {
   padding-bottom: 15px;
 }
 
+.link {
+  background-color: #def;
+  padding: 10px;
+}
 .links {
   padding-top: 15px;
 }
