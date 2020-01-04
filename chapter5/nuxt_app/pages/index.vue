@@ -5,12 +5,7 @@
     <p>{{$store.state.message}}</p>
     <p>{{ message }}</p>
     <hr />
-    <div
-      class="link"
-      @click.exact="$store.commit({type:'count', message:'add 1!', add:1})"
-      @click.shift="$store.commit({type:'count', message:'add 5!!', add:5})"
-      @click.ctrl="$store.commit({type:'count', message:'add 10!!!', add:10})"
-    >
+    <div class="link" @click.exact="$store.dispatch('doit')">
       <a @click.stop="$store.commit('reset')">clicked: {{ $store.state.counter }}</a>
     </div>
     <router-link to="/other">Go to Other</router-link>
