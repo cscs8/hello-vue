@@ -86,12 +86,9 @@ export default {
         return this.$store.state.memo.page;
       },
       set: function(p) {
-        var pg =
-          (this.$store.state.memo.memo.length - 1) / this.num_per_page <= p
-            ? Math.ceil(
-                (this.$store.memo.memo.length - 1) / this.num_per_page
-              ) - 1
-            : p;
+        let len = this.$store.state.memo.memo.length - 1;
+        let maxPage = Math.ceil(len / this.num_per_page) - 1;
+        var pg = p > len / this.num_per_page ? maxPage : p;
         pg = pg < 0 ? 0 : pg;
         this.$store.commit("memo/set_page", pg);
       }
