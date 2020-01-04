@@ -63,7 +63,7 @@ export default {
         var arr = [];
         var data = this.$store.state.memo.memo;
         data.forEach(element => {
-          var isExists =
+          let isExists =
             0 <= element.title.toLowerCase().indexOf(this.title.toLowerCase());
           if (isExists) {
             arr.push(element);
