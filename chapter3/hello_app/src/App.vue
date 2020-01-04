@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <HelloWorld :title="message" />
+    <HelloWorld :title="message" v-on:result-event="appAction" />
     <hr />
     <button v-on:click="doAction">change title</button>
+    <p>{{ result }}</p>
   </div>
 </template>
 
@@ -16,13 +17,17 @@ export default {
   },
   data: function() {
     return {
-      message: "HELLO"
+      message: "HELLO",
+      result: "no event."
     };
   },
   methods: {
     doAction: function() {
       var input = prompt("new title:");
       this.message = input;
+    },
+    appAction: function(message) {
+      this.result = '(*** you send:"' + message + '". ***)';
     }
   }
 };
