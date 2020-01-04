@@ -34,6 +34,12 @@ export default {
           : "*** no password ***";
       return "ID:" + id + "<br>PASS:" + pass;
     }
+  },
+  validate({ params }) {
+    if (params.id == undefined || params.pass == undefined) {
+      return false;
+    }
+    return true;
   }
 };
 </script>
