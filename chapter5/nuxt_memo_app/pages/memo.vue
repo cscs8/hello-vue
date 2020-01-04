@@ -60,6 +60,7 @@ export default {
     },
     page_items: function() {
       if (this.find_flg) {
+        // 検索ボタンを押したとき
         var arr = [];
         var data = this.$store.state.memo.memo;
         data.forEach(element => {
@@ -72,6 +73,7 @@ export default {
         return arr;
       }
       if (this.sel_flg != false) {
+        // メモを選択しているとき
         return [this.sel_flg];
       }
       return this.$store.state.memo.memo.slice(
