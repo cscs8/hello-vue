@@ -5,7 +5,7 @@
     <p>{{$store.state.message}}</p>
     <p>{{ message }}</p>
     <hr />
-    <div class="link" v-on:click="doAction">
+    <div class="link" @click="$store.commit('count')" @click.ctrl="$store.commit('reset')">
       <a>clicked: {{ $store.state.counter }}</a>
     </div>
     <router-link to="/other">Go to Other</router-link>
@@ -39,11 +39,6 @@ export default {
         "." +
         d.getMilliseconds();
     }, 1000);
-  },
-  methods: {
-    doAction: function() {
-      this.$store.state.counter++;
-    }
   }
 };
 </script>
