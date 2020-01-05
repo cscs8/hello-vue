@@ -6,7 +6,10 @@
       <input type="text" v-model="msg" />
       <button @click="doClick">Click</button>
     </div>
-    <table>
+    <ul v-for="(data, key) in json_data" :key="key">
+      <li>{{data.name}} ({{data.age}}) [{{key}}]</li>
+    </ul>
+    <!-- <table>
       <tr>
         <th>User ID</th>
         <td>{{json_data.userId}}</td>
@@ -23,14 +26,15 @@
         <th>Body</th>
         <td>{{json_data.body}}</td>
       </tr>
-    </table>
+    </table>-->
   </div>
 </template>
 
 <script>
 const axios = require("axios");
 // var url = "https://jsonplaceholder.typicode.com/todos/1";
-var url = "https://jsonplaceholder.typicode.com/posts/";
+// var url = "https://jsonplaceholder.typicode.com/posts/";
+var url = "https://cs8-vue.firebaseio.com/person.json";
 
 export default {
   data: function() {
