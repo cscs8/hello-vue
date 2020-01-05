@@ -3,12 +3,15 @@
     <h1>{{title}}</h1>
     <p>{{message}}</p>
     <div>
-      <input type="text" v-model="msg" />
-      <button @click="doClick">Click</button>
+      <input type="text" v-model="find" />
+      <button @click="getData">Click</button>
     </div>
-    <ul v-for="(data, key) in json_data" :key="key">
-      <li>{{data.name}} ({{data.age}}) [{{key}}]</li>
+    <ul>
+      <li>{{json_data}}</li>
     </ul>
+    <!-- <ul v-for="(data, key) in json_data" :key="key">
+      <li>{{data.name}} ({{data.age}}) [{{key}}]</li>
+    </ul>-->
     <!-- <table>
       <tr>
         <th>User ID</th>
@@ -34,30 +37,45 @@
 const axios = require("axios");
 // var url = "https://jsonplaceholder.typicode.com/todos/1";
 // var url = "https://jsonplaceholder.typicode.com/posts/";
-var url = "https://cs8-vue.firebaseio.com/person.json";
+var url = "https://cs8-vue.firebaseio.com/person.json/";
 
 export default {
   data: function() {
     return {
       title: "Axios",
-      msg: "",
+      find: "",
+      // msg: "",
       message: "axios app.",
       json_data: {}
     };
   },
   methods: {
-    doClick: function(event) {
+    getData: function(event) {
+      let id_url = url + this.find + ".json";
       axios
-        .get(url + this.msg)
+        .get(id_url)
         .then(res => {
-          this.message = "get ID=" + this.msg;
+          this.message = "get ID=" + this.find;
           this.json_data = res.data;
         })
         .catch(error => {
           // this.message = error;
           this.message = "ERRROR!";
+          this.json_data = {};
         });
     }
+    // doClick: function(event) {
+    //   axios
+    //     .get(url + this.msg)
+    //     .then(res => {
+    //       this.message = "get ID=" + this.msg;
+    //       this.json_data = res.data;
+    //     })
+    //     .catch(error => {
+    //       // this.message = error;
+    //       this.message = "ERRROR!";
+    //     });
+    // }
   }
   // asyncData: async function() {
   //   let id = 1;
