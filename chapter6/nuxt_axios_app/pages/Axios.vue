@@ -9,6 +9,38 @@
     <!-- <ul>
       <li>{{json_data}}</li>
     </ul>-->
+    <table>
+      <tr>
+        <th>Email</th>
+        <td>
+          <input v-model="email" />
+        </td>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <td>
+          <input v-model="username" />
+        </td>
+      </tr>
+      <tr>
+        <th>Age</th>
+        <td>
+          <input v-model="age" />
+        </td>
+      </tr>
+      <tr>
+        <th>Tel</th>
+        <td>
+          <input v-model="tel" />
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <button @click="addData">Click</button>
+        </td>
+      </tr>
+    </table>
     <ul v-for="(data, key) in json_data" :key="key">
       <li>
         <strong>{{key}}</strong>
@@ -44,28 +76,49 @@ const axios = require("axios");
 // orderBy="$key"&equalTo=";
 var url =
   // "https://cs8-vue.firebaseio.com/person.json?orderBy=%22$key%22&equalTo=%22";
-  "https://cs8-vue.firebaseio.com/person.json?orderBy=%22age%22";
+  // "https://cs8-vue.firebaseio.com/person.json?orderBy=%22age%22";
+  "https://cs8-vue.firebaseio.com/person";
 
 export default {
   data: function() {
     return {
       title: "Axios",
       find: "",
+      email: "",
+      username: "",
+      tel: "",
+      age: 0,
       // msg: "",
       message: "axios app.",
       json_data: {}
     };
   },
   methods: {
-    getData: function(event) {
-      let range = this.find.split(",");
-      // let id_url = url + this.find + "%22";
-      let age_url = url + "&startAt=" + range[0] + "&endAt=" + range[1];
+    addData: function(event) {
+      let add_url = url + "/" + this.email + ".json";
+      let data = {
+        name: this.username,
+        age: this.age,
+        tel: this.tel
+      };
       axios
-        // .get(id_url)
-        .get(age_url)
+        .put(add_url, data)
         .then(res => {
-          this.message = "get ID=" + this.find;
+          this.email = "";
+          this.username = "";
+          this.age = 0;
+          this.tel = "";
+          this.getData();
+        })
+        .catch(error => {
+          this.message = "add ERROR!";
+        });
+    },
+    getData: function() {
+      axios
+        .get(url + ".json")
+        .then(res => {
+          this.message = "get all Data";
           this.json_data = res.data;
         })
         .catch(error => {
@@ -74,6 +127,23 @@ export default {
           this.json_data = {};
         });
     }
+    // getData: function(event) {
+    //   let range = this.find.split(",");
+    //   // let id_url = url + this.find + "%22";
+    //   let age_url = url + "&startAt=" + range[0] + "&endAt=" + range[1];
+    //   axios
+    //     // .get(id_url)
+    //     .get(age_url)
+    //     .then(res => {
+    //       this.message = "get ID=" + this.find;
+    //       this.json_data = res.data;
+    //     })
+    //     .catch(error => {
+    //       // this.message = error;
+    //       this.message = "ERRROR!";
+    //       this.json_data = {};
+    //     });
+    // }
     // doClick: function(event) {
     //   axios
     //     .get(url + this.msg)
