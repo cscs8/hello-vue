@@ -43,10 +43,16 @@ export default {
   },
   methods: {
     doClick: function(event) {
-      axios.get(url + this.msg).then(res => {
-        this.message = "get ID=" + this.msg;
-        this.json_data = res.data;
-      });
+      axios
+        .get(url + this.msg)
+        .then(res => {
+          this.message = "get ID=" + this.msg;
+          this.json_data = res.data;
+        })
+        .catch(error => {
+          // this.message = error;
+          this.message = "ERRROR!";
+        });
     }
   }
   // asyncData: async function() {
