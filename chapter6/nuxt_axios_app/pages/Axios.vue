@@ -6,12 +6,16 @@
       <input type="text" v-model="find" />
       <button @click="getData">Click</button>
     </div>
-    <ul>
+    <!-- <ul>
       <li>{{json_data}}</li>
-    </ul>
-    <!-- <ul v-for="(data, key) in json_data" :key="key">
-      <li>{{data.name}} ({{data.age}}) [{{key}}]</li>
     </ul>-->
+    <ul v-for="(data, key) in json_data" :key="key">
+      <li>
+        <strong>{{key}}</strong>
+        <br />
+        {{data}}
+      </li>
+    </ul>
     <!-- <table>
       <tr>
         <th>User ID</th>
@@ -39,7 +43,8 @@ const axios = require("axios");
 // var url = "https://jsonplaceholder.typicode.com/posts/";
 // orderBy="$key"&equalTo=";
 var url =
-  "https://cs8-vue.firebaseio.com/person.json?orderBy=%22$key%22&equalTo=%22";
+  // "https://cs8-vue.firebaseio.com/person.json?orderBy=%22$key%22&equalTo=%22";
+  "https://cs8-vue.firebaseio.com/person.json?orderBy=%22age%22";
 
 export default {
   data: function() {
@@ -53,9 +58,12 @@ export default {
   },
   methods: {
     getData: function(event) {
-      let id_url = url + this.find + "%22";
+      let range = this.find.split(",");
+      // let id_url = url + this.find + "%22";
+      let age_url = url + "&startAt=" + range[0] + "&endAt=" + range[1];
       axios
-        .get(id_url)
+        // .get(id_url)
+        .get(age_url)
         .then(res => {
           this.message = "get ID=" + this.find;
           this.json_data = res.data;
