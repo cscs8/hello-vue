@@ -14,6 +14,7 @@
         <th>Email</th>
         <td>
           <input v-model="email" />
+          <button @click="delData">Delete</button>
         </td>
       </tr>
       <tr>
@@ -94,6 +95,24 @@ export default {
     };
   },
   methods: {
+    delData: function(event) {
+      let del_url = url + "/" + this.email + ".json";
+      axios
+        .delete(del_url)
+        .then(res => {
+          console.log(res);
+          if (res.data == null) {
+            this.message = this.email + "は存在しません.";
+            return;
+          }
+          this.message = this.email + "を削除しました!";
+          this.email = "";
+          this.getData();
+        })
+        .catch(error => {
+          this.message = "del ERROR!";
+        });
+    },
     addData: function(event) {
       let add_url = url + "/" + this.email + ".json";
       let data = {
