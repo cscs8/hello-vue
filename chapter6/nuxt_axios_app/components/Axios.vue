@@ -1,22 +1,40 @@
 <template>
   <div class="container">
-    <p>axios data: {{data}}</p>
+    <pre>axios data: {{axiosData}}</pre>
   </div>
 </template>
 
 <script>
+const axios = require("axios");
+var url =
+  // "https://jsonplaceholder.typicode.com/todos/1";
+  "/README.md";
+
 export default {
   data: function() {
     return {
-      data: ""
+      axiosData: ""
     };
   },
-  methods: {},
+  // methods: {},
 
   created: async function() {
-    const axios = require("axios");
-    this.data = await axios.get("https://jsonplaceholder.typicode.com/todos/1");
+    let result = await axios.get(url);
+    this.axiosData = result.data;
+  },
+  asyncData: async function() {
+    this.axiosData = await axios.get(url);
+    return;
   }
 };
 </script>
 
+
+<style>
+pre {
+  padding: 10px;
+  font-size: 18pt;
+  background-color: #efefef;
+  white-space: pre-wrap;
+}
+</style>

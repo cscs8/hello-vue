@@ -5,6 +5,7 @@
       <h1 class="title">nuxt_axios_app</h1>
       <h2 class="subtitle">My epic Nuxt.js project</h2>
       <axios />
+      <pre>axio index : {{axiosData}}</pre>
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
         <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
@@ -17,10 +18,20 @@
 import Logo from "~/components/Logo.vue";
 import Axios from "~/components/Axios.vue";
 
+const axios = require("axios");
+var url =
+  // "https://jsonplaceholder.typicode.com/todos/1";
+  "/README.md";
+
 export default {
   components: {
     Logo,
     Axios
+  },
+  asyncData: async function() {
+    return {
+      axiosData: await axios.get(url)
+    };
   }
 };
 </script>
