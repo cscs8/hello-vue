@@ -37,7 +37,9 @@
 const axios = require("axios");
 // var url = "https://jsonplaceholder.typicode.com/todos/1";
 // var url = "https://jsonplaceholder.typicode.com/posts/";
-var url = "https://cs8-vue.firebaseio.com/person.json/";
+// orderBy="$key"&equalTo=";
+var url =
+  "https://cs8-vue.firebaseio.com/person.json?orderBy=%22$key%22&equalTo=%22";
 
 export default {
   data: function() {
@@ -51,7 +53,7 @@ export default {
   },
   methods: {
     getData: function(event) {
-      let id_url = url + this.find + ".json";
+      let id_url = url + this.find + "%22";
       axios
         .get(id_url)
         .then(res => {
