@@ -71,6 +71,10 @@
 </template>
 
 <script>
+// https://firebase.google.com/docs/web/setup
+import * as firebase from "firebase/app";
+import "firebase/auth";
+
 const axios = require("axios");
 // var url = "https://jsonplaceholder.typicode.com/todos/1";
 // var url = "https://jsonplaceholder.typicode.com/posts/";
@@ -93,6 +97,35 @@ export default {
       message: "axios app.",
       json_data: {}
     };
+  },
+  created: function() {
+    var firebaseConfig = {
+      apiKey: "AIzaSyB9u5Rtx03n8pElnFD1QL9qenbThI4pEqg",
+      authDomain: "cs8-vue.firebaseapp.com",
+      databaseURL: "https://cs8-vue.firebaseio.com",
+      projectId: "cs8-vue",
+      storageBucket: "cs8-vue.appspot.com",
+      messagingSenderId: "508542185763",
+      appId: "1:508542185763:web:b69a21d6a5d3c1f7619c96",
+      measurementId: "G-T2NHX43ZQR"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // firebase.analytics();
+    var provider = new firebase.auth.GoogleAuthProvider();
+    var self = this;
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(function(result) {
+        self.message = result.user.displayName + ", " + result.user.email;
+        self.message += result.user;
+      })
+      .catch(error => {
+        self.message = "Login failed! " + error.message;
+      });
   },
   methods: {
     delData: function(event) {
