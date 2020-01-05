@@ -13,18 +13,21 @@ var url =
 export default {
   data: function() {
     return {
-      axiosData: ""
+      // axiosData: ""
     };
   },
   // methods: {},
 
-  created: async function() {
-    let result = await axios.get(url);
-    this.axiosData = result.data;
-  },
+  // created: async function() {
+  //   let result = await axios.get(url);
+  //   this.axiosData = result.data;
+  // },
   asyncData: async function() {
-    this.axiosData = await axios.get(url);
-    return;
+    // this.axiosData = await axios.get(url);
+    let result = await axios.get(url);
+    return {
+      axiosData: result.data
+    };
   }
 };
 </script>
